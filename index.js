@@ -16,7 +16,55 @@ function getPlayerData() {
         .then(res => res.json())
         .then(res => {
             const values = res.values
-            console.log(values);
+            // console.log(values);
+            // let baseballIcon = document.createElement("span")
+            // baseballIcon.innerHTML = "&#x26be;";
+            // container.appendChild(baseballIcon);
+            let container = document.getElementById("baseball-table");
+            let table = document.createElement("table");
+            let thead = document.createElement("thead")
+            table.appendChild(thead);
+            let batOrder = document.createElement("th")
+            batOrder.textContent = "BO";
+            thead.appendChild(batOrder);
+            for (let i = 0; i < values[0].length; i++) {
+                if(values[0][i] == "Number"){
+                    let th = document.createElement("th");
+                    th.textContent = "Player Name";
+                    thead.appendChild(th);
+                    i += 2;
+                } else {
+                    let th = document.createElement("th");
+                    th.textContent = values[0][i];
+                    thead.appendChild(th);
+                }
+            }
+            let tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            for (let i = 1; i < values.length; i++) {
+                let tr = document.createElement("tr");
+                tbody.appendChild(tr);
+                let boTd = document.createElement("td");
+                boTd.textContent = i;
+                tr.appendChild(boTd);
+                for (let j = 0; j < values[i].length; j++) {
+                    if(j == 0){
+                        //This is the name field
+                        let td = document.createElement("td");
+                        let playerNum = values[i][j];
+                        let playerFI = values[i][j+1];
+                        let playerLN = values[i][j+2];
+                        td.textContent = playerFI + ". " + playerLN + " (" + playerNum + ")";
+                        tr.appendChild(td);
+                        j += 2;
+                    } else {
+                        let td = document.createElement("td");
+                        td.textContent = values[i][j];
+                        tr.appendChild(td);
+                    }
+                }
+            }
+            container.appendChild(table);
         });
 }
 
