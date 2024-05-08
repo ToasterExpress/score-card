@@ -1,3 +1,25 @@
+const baseUrl = "https://script.google.com/macros/s/AKfycbxvGEd9J6F2bYXZKKLvvk4qXHPjCJtBjS-mcczgIrZ0oU0f5OZx15aEJc4iPmqpfxMf/exec"
+
+const para = {
+    spreadsheetId: "13akrBaptUDsM-knJnjHvtyTmDjdfC8zVy_cDUVYO2Hs",  // Please set your Google Spreadsheet ID.
+    sheetName: "Player_Stats"  // Please set the sheet name you want to retrieve the values.
+};
+const q = new URLSearchParams(para);
+const url = baseUrl + "?" + q;
+
+document.addEventListener("DOMContentLoaded", function(arg) {
+    getPlayerData();
+});
+
+function getPlayerData() {
+    fetch(url)
+        .then(res => res.json())
+        .then(res => {
+            const values = res.values
+            console.log(values);
+        });
+}
+
 let scoreCard1 = document.getElementById("score-card1");
 let scoreCard2 = document.getElementById("score-card2");
 let score1 = 0;
