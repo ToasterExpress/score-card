@@ -31,30 +31,7 @@
                     <th>Name</th>
                 </thead>
                 <tbody id="tbody-names">
-                    <tr>
-                        <td>1</td>
-                        <td>D. Plock</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>J. Harden</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>K. Thorn</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>J. Harden</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>J. Harden</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>J. Harden</td>
-                    </tr>
+                    <!-- to be filled by js -->
                 </tbody>
             </table>
             <div id="at-bat-container">
@@ -71,9 +48,9 @@
                 </div>
             </div>
             <div id="bases-state">
-                <div class="base base-filled" id="atSecond"></div>
-                <div class="base" id="atFirst"></div>
-                <div class="base" id="atThird"></div>
+                <div onclick="AdvanceBase()" class="base base-filled" id="atSecond"></div>
+                <div onclick="AdvanceBase()" class="base" id="atFirst"></div>
+                <div onclick="AdvanceBase()" class="base" id="atThird"></div>
             </div>
         </div>
     </div>

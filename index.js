@@ -7,11 +7,51 @@ const para = {
 const q = new URLSearchParams(para);
 const url = baseUrl + "?" + q;
 let team = [];
-
+let battingOrder = [];
+let playerAtBat = "None";
+let playerAtBatEl = document.getElementById("at-bat-player");
+let battingOrderTable = document.getElementById("batting-order");
 
 document.addEventListener("DOMContentLoaded", function (arg) {
     getPlayerData();
 });
+
+function UpdatePlayerAtBat(player){
+    playerAtBat = player;
+    player.AtBats += 1;
+    playerAtBatEl.textContent = playerAtBat.firstInit + ". " + playerAtBat.lastName + " (" + playerAtBat.number + ")";
+    if(battingOrder.includes(player)){
+        //Highlight Row with player
+        let tr = battingOrderTable.getElementsByTagName("tr")[player.battingOrder];
+        tr.classList.add("base-filled");
+    }
+    //Remove highlight from any other batter in batting order
+    battingOrder.forEach(player => {
+        if(player != playerAtBat){
+            let tr = battingOrderTable.getElementsByTagName("tr")[player.battingOrder];
+            tr.classList.remove("base-filled");
+        }
+    });
+}
+
+function UpdateBattingOrderTable() {
+
+    let tbody = battingOrderTable.getElementsByTagName("tbody")[0];
+    tbody.innerHTML = "";
+    let playerCount = 0;
+    battingOrder.forEach(player => {
+        let tr = document.createElement("tr");
+        tbody.appendChild(tr);
+        let td = document.createElement("td");
+        td.textContent = playerCount + 1;
+        tr.appendChild(td);
+        td = document.createElement("td");
+        td.textContent = player.firstInit + ". " + player.lastName + " (" + player.number + ")";
+        tr.appendChild(td);
+        playerCount++;
+    })
+}
+
 
 function getPlayerData() {
     fetch(url)
@@ -26,7 +66,7 @@ function getPlayerData() {
             values.forEach(row => {
                 if (count > 0) {
                     team.push({
-                        battingOrder: count,
+                        battingOrder: 0,
                         number: row[0],
                         firstInit: row[1],
                         lastName: row[2],
@@ -65,6 +105,15 @@ function getPlayerData() {
             table.appendChild(tbody);
             team.forEach(player => {
                 let tr = document.createElement("tr");
+                tr.addEventListener("click", function() {
+                    // Add Player to current at bat, and add to batting order array.
+                    if(!battingOrder.includes(player)){
+                        battingOrder.push(player);
+                        player.battingOrder = battingOrder.length;
+                        UpdateBattingOrderTable();
+                        UpdatePlayerAtBat(player)
+                    }
+                });
                 tbody.appendChild(tr);
                 let td = document.createElement("td");
                 td.textContent = player.battingOrder;
@@ -88,7 +137,8 @@ function getPlayerData() {
                 td.textContent = player.K;
                 tr.appendChild(td);
                 td = document.createElement("td");
-                td.textContent = player.BattingAvg;
+                let BattAvgStr = (Math.round(player.BattingAvg * 1000) / 1000).toFixed(3).toString();
+                td.textContent = BattAvgStr;
                 tr.appendChild(td);
             })
             // for (let i = 1; i < values.length; i++) {
