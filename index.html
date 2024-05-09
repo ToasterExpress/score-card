@@ -23,54 +23,58 @@
                 onclick="incrementGuest3()">+3</button>
         </div>
     </div>
-    <div id="at-bat">
-        <table id="batting-order">
-            <thead>
-                <th>BO</th>
-                <th>Name</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>D. Plock</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>J. Harden</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>K. Thorn</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>J. Harden</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>J. Harden</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>J. Harden</td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="at-bat-container">
-            <h3>Currently At Bat:</h2>
-            <div>
-                <div id="at-bat-player">Name</div>
-                <div id="at-bat-count">0-0</div>
+    <div class="at-bat-bar">
+        <div id="at-bat">
+            <table id="batting-order">
+                <thead>
+                    <th>BO</th>
+                    <th>Name</th>
+                </thead>
+                <tbody id="tbody-names">
+                    <tr>
+                        <td>1</td>
+                        <td>D. Plock</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>J. Harden</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>K. Thorn</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>J. Harden</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>J. Harden</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>J. Harden</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="at-bat-container">
+                <h3 id="current-bat">Currently At Bat:</h3>
+                <div class="bat-nameCount">
+                    <div id="at-bat-player">Name</div>
+                    <div id="at-bat-count">0-0</div>
+                </div>
+                <div class="bat-buttons">
+                    <button onclick="Single()">Single</button>
+                    <button onclick="Double()">Double</button>
+                    <button onclick="Triple()">Triple</button>
+                    <button onclick="HomeRun()">Home Run</button>
+                </div>
             </div>
-            <button onclick="Single()">Single</button>
-            <button onclick="Double()">Double</button>
-            <button onclick="Triple()">Triple</button>
-            <button onclick="HomeRun()">Home Run</button>
-        </div>
-        <div id="bases-state">
-            <div class="base base-filled" id="atSecond"></div>
-            <div class="base" id="atFirst"></div>
-            <div class="base" id="atThird"></div>
+            <div id="bases-state">
+                <div class="base base-filled" id="atSecond"></div>
+                <div class="base" id="atFirst"></div>
+                <div class="base" id="atThird"></div>
+            </div>
         </div>
     </div>
     <div class="baseball-table" id="baseball-table">

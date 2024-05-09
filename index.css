@@ -136,3 +136,25 @@ button {
     background-color: rgb(223, 200, 27); /* Change color as needed */
 }
 
+.at-bat-bar {
+    display: flex;
+    justify-content: space-around;
+}
+
+#batting-order {
+    margin: 0 70px 0 15px;
+}
+
+#current-bat {
+    display: flex;
+    justify-content: center;
+}
+
+.bat-nameCount {
+    display: flex;
+    justify-content: space-around;
+}
+
+#bases-state {
+    margin: 40px -50px 0 50px
+}
