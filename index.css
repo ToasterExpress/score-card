@@ -99,3 +99,40 @@ button {
     text-align: center; 
 }
 
+#bases-state {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform: rotate(45deg);
+    margin: 20px auto;
+    left:60px;
+}
+
+.base {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    border: 2px solid black;
+}
+
+#atFirst {
+    top: 73px;
+    left: 65px;
+
+}
+
+#atSecond {
+    top: 73px;
+
+}
+
+#atThird {
+    top: 140px;
+    left: 0;
+}
+
+.base-filled {
+    background-color: rgb(223, 200, 27); /* Change color as needed */
+}
+

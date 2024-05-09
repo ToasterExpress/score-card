@@ -6,8 +6,10 @@ const para = {
 };
 const q = new URLSearchParams(para);
 const url = baseUrl + "?" + q;
+let team = [];
 
-document.addEventListener("DOMContentLoaded", function(arg) {
+
+document.addEventListener("DOMContentLoaded", function (arg) {
     getPlayerData();
 });
 
@@ -20,6 +22,26 @@ function getPlayerData() {
             // let baseballIcon = document.createElement("span")
             // baseballIcon.innerHTML = "&#x26be;";
             // container.appendChild(baseballIcon);
+            let count = 0;
+            values.forEach(row => {
+                if (count > 0) {
+                    team.push({
+                        battingOrder: count,
+                        number: row[0],
+                        firstInit: row[1],
+                        lastName: row[2],
+                        AtBats: row[3],
+                        Runs: row[4],
+                        Hits: row[5],
+                        RBIs: row[6],
+                        K: row[7],
+                        BattingAvg: row[8]
+                    })
+                }
+                count++;
+
+            })
+            console.log(team);
             let container = document.getElementById("baseball-table");
             let table = document.createElement("table");
             let thead = document.createElement("thead")
@@ -28,7 +50,7 @@ function getPlayerData() {
             batOrder.textContent = "BO";
             thead.appendChild(batOrder);
             for (let i = 0; i < values[0].length; i++) {
-                if(values[0][i] == "Number"){
+                if (values[0][i] == "Number") {
                     let th = document.createElement("th");
                     th.textContent = "Player Name";
                     thead.appendChild(th);
@@ -41,29 +63,57 @@ function getPlayerData() {
             }
             let tbody = document.createElement("tbody");
             table.appendChild(tbody);
-            for (let i = 1; i < values.length; i++) {
+            team.forEach(player => {
                 let tr = document.createElement("tr");
                 tbody.appendChild(tr);
-                let boTd = document.createElement("td");
-                boTd.textContent = i;
-                tr.appendChild(boTd);
-                for (let j = 0; j < values[i].length; j++) {
-                    if(j == 0){
-                        //This is the name field
-                        let td = document.createElement("td");
-                        let playerNum = values[i][j];
-                        let playerFI = values[i][j+1];
-                        let playerLN = values[i][j+2];
-                        td.textContent = playerFI + ". " + playerLN + " (" + playerNum + ")";
-                        tr.appendChild(td);
-                        j += 2;
-                    } else {
-                        let td = document.createElement("td");
-                        td.textContent = values[i][j];
-                        tr.appendChild(td);
-                    }
-                }
-            }
+                let td = document.createElement("td");
+                td.textContent = player.battingOrder;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.firstInit + ". " + player.lastName + " (" + player.number + ")";
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.AtBats;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.Runs;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.Hits;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.RBIs;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.K;
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.textContent = player.BattingAvg;
+                tr.appendChild(td);
+            })
+            // for (let i = 1; i < values.length; i++) {
+            //     let tr = document.createElement("tr");
+            //     tbody.appendChild(tr);
+            //     let boTd = document.createElement("td");
+            //     boTd.textContent = i;
+            //     tr.appendChild(boTd);
+            //     for (let j = 0; j < values[i].length; j++) {
+            //         if(j == 0){
+            //             //This is the name field
+            //             let td = document.createElement("td");
+            //             let playerNum = values[i][j];
+            //             let playerFI = values[i][j+1];
+            //             let playerLN = values[i][j+2];
+            //             td.textContent = playerFI + ". " + playerLN + " (" + playerNum + ")";
+            //             tr.appendChild(td);
+            //             j += 2;
+            //         } else {
+            //             let td = document.createElement("td");
+            //             td.textContent = values[i][j];
+            //             tr.appendChild(td);
+            //         }
+            //     }
+            // }
             container.appendChild(table);
         });
 }
